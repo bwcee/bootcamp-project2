@@ -87,8 +87,9 @@
 -- INSERT INTO roles (role) VALUES ('owner');
 -- INSERT INTO roles (role) VALUES ('cashier');
 
-ALTER TABLE items ADD COLUMN image BYTEA;
+-- DROP TABLE users_roles CASCADE;
 
--- ALTER TABLE sales DROP COLUMN item_id;
+-- ALTER TABLE users ADD COLUMN co_id INTEGER;
+ALTER TABLE users ADD UNIQUE (email);
 
 --  psql -d pos -f /mnt/c/Users/boon_/Desktop/rocketacademy/bootcamp/Module3_BackEndApps/pos_project/models/init_tables.sql

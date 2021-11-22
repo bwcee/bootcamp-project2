@@ -1,11 +1,10 @@
-import {} from 'dotenv/config';
-import express from "express";
+import express, { request } from "express";
 import pg from "pg";
 import cookieParser from "cookie-parser";
 import methodOverride from "method-override";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { router as indexRoutes } from "./routes/index.js";
+import { router as userRoutes } from "./routes/user.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -25,8 +24,36 @@ app.use(express.static(join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(cookieParser());
+app.use((req, res, next) => {
+  req.userLoggedIn = false;
+  req.cookies.loggedIn ? (req.userLoggedIn = true) : "";
+  next();
+});
 
-app.use("/", indexRoutes);
+const lockedAccess = (req, res, next) => {
+  if (req.userLoggedIn === false) {
+    const data = {
+      text: "Whatcha doin? You ain't no have access. Go back and try again!",
+    };
+    return res.render("pages/error", { data });
+  } else {
+    const userQuery = "SELECT * FROM users WHERE id=$1";
+    pool
+      .query(userQuery, [req.cookies.userID])
+      .then((result) => {
+        req.user = result.rows[0];
+        next();
+      })
+      .catch((err) => {
+        const data = {
+          text: "Something went wrong... go back and try again",
+        };
+        return res.render("pages/error", { data });
+      });
+  }
+};
+
+app.use("/", userRoutes);
 
 app.listen(3004);
 

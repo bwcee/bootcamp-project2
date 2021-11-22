@@ -1,1 +1,18 @@
-<h1>This is a h1!!</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../template/head'); %>
+  </head>
+
+  <body class="container">
+    <header><%- include('../template/nav'); %></header>
+    <main>
+      <div class="container-fluid">
+        <a href="/signin"><button class="btn btn-success">Sign-in</button></a>
+        <a href="/signup"><button class="btn btn-success">Sign-up</button></a>
+      </div>
+    </main>
+
+    <footer><%- include('../template/footer'); %></footer>
+  </body>
+</html>
