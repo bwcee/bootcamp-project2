@@ -6,18 +6,18 @@ let router = express.Router();
 
 router.get("/dash", adminCtrl.goStart);
 
-router.get("/add-employee", adminCtrl.goAddE);
+router.get("/employee", adminCtrl.goAddE);
 
-router.post("/add-employee", adminCtrl.doAddE);
+router.post("/employee", adminCtrl.doAddE);
 
-router.get("/update-employee/:idToUpdate", adminCtrl.goUpdateE);
+router.get("/employee/:idToUpdate", adminCtrl.goUpdateE);
 
-router.put("/update-employee/:idToUpdate", adminCtrl.doUpdateE);
+router.put("/employee/:idToUpdate", adminCtrl.doUpdateE);
 
-router.delete("/delete-employee/:idToDelete", adminCtrl.doDeleteE);
+router.delete("/employee/delete/:idToDelete", adminCtrl.doDeleteE);
 
-router.get("/update-profile", adminCtrl.goUpdateP);
+router.get("/profile", adminCtrl.goUpdateP);
 
-router.put("/update-profile", adminCtrl.doUpdateP);
+router.put("/profile", adminCtrl.doUpdateP);
 
 export { router };

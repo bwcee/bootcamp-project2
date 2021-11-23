@@ -13,7 +13,7 @@ export const goAddE = (req, res) => {
     .query(getEmployees)
     .then((result) => {
       const allEmployees = result.rows;
-      return res.render("pages/employee_add", { allEmployees });
+      return res.render("pages/employee", { allEmployees });
     })
     .catch((err) => {
       console.error("Error you doofus!", err);
@@ -34,7 +34,7 @@ export const doAddE = (req, res) => {
   pool
     .query(addEmployee, arr)
     .then(() => {
-      return res.redirect(301, "/admin/add-employee");
+      return res.redirect(301, "/admin/employee");
     })
     .catch((err) => {
       console.error("Error you doofus!", err);
@@ -54,7 +54,7 @@ export const goUpdateE = (req, res) => {
     .query(getEmployee)
     .then((result) => {
       const editEmployee = result.rows[0];
-      return res.render("pages/employee_update", { editEmployee });
+      return res.render("pages/employee_edit", { editEmployee });
     })
     .catch((err) => {
       console.error("Error you doofus!", err);
@@ -74,7 +74,7 @@ export const doUpdateE = (req, res) => {
   pool
     .query(updateEmployee, arr)
     .then(() => {
-      return res.redirect(301, "/admin/add-employee");
+      return res.redirect(301, "/admin/employee");
     })
     .catch((err) => {
       console.error("Error you doofus!", err);
@@ -93,7 +93,7 @@ export const doDeleteE = (req, res) => {
   pool
     .query(deleteQuery)
     .then(() => {
-      return res.redirect(301, "/admin/add-employee");
+      return res.redirect(301, "/admin/employee");
     })
     .catch((err) => {
       console.error("Error you doofus!", err);
@@ -112,7 +112,7 @@ export const goUpdateP = (req, res) => {
     .query(getProfile)
     .then((result) => {
       const profile = result.rows[0];
-      return res.render("pages/profile_update", { profile });
+      return res.render("pages/profile", { profile });
     })
     .catch((err) => {
       console.error("Error you doofus!", err);
@@ -134,7 +134,7 @@ export const doUpdateP = (req, res) => {
     .then((result) => {
       const updateCo = `UPDATE companies SET name=$1 WHERE id=${result.rows[0].co_id}`;
       pool.query(updateCo, [biz_name])
-      return res.redirect(301,"/admin/update-profile")
+      return res.redirect(301,"/admin/profile")
     })
     .catch((err) => {
       console.error("Error you doofus!", err);

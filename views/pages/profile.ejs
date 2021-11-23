@@ -14,31 +14,35 @@
         <div id="page-content-wrapper">
           <!-- Top navigation-->
           <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <a class="navbar-brand" href="#">Add Employee</a>
+            <a class="navbar-brand" href="#">Welcome <%= profile.name %></a>
           </nav>
           <!-- Page content-->
           <div class="container-fluid">
             <div class="table-responsive">
-              <form action="/admin/update-employee/<%= editEmployee.id %>?_method=PUT" method="POST">
+              <form action="/admin/profile?_method=PUT" method="POST">
                 <table class="table">
                   <tr>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Business Name</th>
                   </tr>
                   <tr>
                     <td>
-                      <input class="form-control" type="text" name="name" required value="<%= editEmployee.name %>" />
+                      <input class="form-control" type="text" name="name" required value="<%= profile.name %>" />
                     </td>
                     <td>
-                      <input class="form-control" type="email" name="email" required value="<%= editEmployee.email %>" />
+                      <input class="form-control" type="email" name="email" required value="<%= profile.email %>" />
                     </td>
                     <td>
-                      <input class="form-control" type="tel" name="phone" required value="<%= editEmployee.phone %>" />
+                      <input class="form-control" type="tel" name="phone" value="<%= profile.phone %>" />
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" name="co_name" value="<%= profile.co_name %>" />
                     </td>
                   </tr>
                 </table>
-                <input class="btn btn-success btn-block" type="submit" value="Update Employee Detail" />
+                <input class="btn btn-success btn-block" type="submit" value="Update Profile" />
               </form>
             </div>
           </div>
