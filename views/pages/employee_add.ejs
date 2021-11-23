@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../template/head'); %>
+</head>
+
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+      <%- include('../template/sidebar'); %>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+          <!-- Top navigation-->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <a class="navbar-brand" href="#">Add Employee</a>
+          </nav>
+          <!-- Page content-->
+          <div class="container-fluid">
+            <div class="table-responsive">
+              <table class="table table-hover">
+
+                <tr class="bg-success">
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Delete</th>
+                <% if(allEmployees !== undefined) { %>
+                </tr>
+                <% allEmployees.forEach((el)=> { %>
+                  <tr class="clickable" onclick="window.location='/admin/update-employee/<%= el.id %>'">
+                    <td>
+                      <%= el.name %>
+                    </td>
+                    <td>
+                      <%= el.email %>
+                    </td>
+                    <td>
+                      <%= el.phone %>
+                    </td>
+                    <td>
+                      <%= el.role %>
+                    </td>
+                    <td>
+                      <form action="/admin/delete-employee/<%= el.id %>?_method=DELETE" method="POST">
+                        <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+                      </form>
+                    </td>
+                  </tr>
+                  <% }) %>
+                  <% } %> 
+              </table>
+            </div>
+            <form action="/admin/add-employee" method="POST">
+              <label for="name">Name: </label>
+              <input type="text" name="name" required/>
+              <label for="email">Email: </label>
+              <input type="email" name="email" required/>
+              <label for="phone">Phone: </label>
+              <input type="tel" name="phone" required/>
+              <input class="btn btn-success btn-block" type="submit" value="Add Employee" />
+            </form>
+          </div>
+        </div>
+    </div>
+    <footer>
+      <%- include('../template/footer'); %>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../template/head'); %>
+</head>
+
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+      <%- include('../template/sidebar'); %>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+          <!-- Top navigation-->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <a class="navbar-brand" href="#">Add Employee</a>
+          </nav>
+          <!-- Page content-->
+          <div class="container-fluid">
+            <div class="table-responsive">
+              <form action="/admin/update-employee/<%= editEmployee.id %>?_method=PUT" method="POST">
+                <table class="table">
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input class="form-control" type="text" name="name" required value="<%= editEmployee.name %>" />
+                    </td>
+                    <td>
+                      <input class="form-control" type="email" name="email" required value="<%= editEmployee.email %>" />
+                    </td>
+                    <td>
+                      <input class="form-control" type="tel" name="phone" required value="<%= editEmployee.phone %>" />
+                    </td>
+                  </tr>
+                </table>
+                <input class="btn btn-success btn-block" type="submit" value="Update Employee Detail" />
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <footer>
+      <%- include('../template/footer'); %>
+    </footer>
+</body>
+
+</html>

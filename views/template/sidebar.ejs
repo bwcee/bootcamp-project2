@@ -1,0 +1,50 @@
+<div class="sidebar-heading border-bottom bg-light">Dream POS</div>
+<div class="list-group list-group-flush">
+  <a class="
+              list-group-item list-group-item-action list-group-item-light
+              p-3
+            " href="/admin/update-profile">Profile</a>
+  <a class="
+              list-group-item list-group-item-action list-group-item-light
+              p-3
+            " href="/admin/items">Item List</a>
+  <a class="
+              list-group-item list-group-item-action list-group-item-light
+              p-3
+            " href="/admin/categories">Categories</a>
+  <a class="
+              list-group-item list-group-item-action list-group-item-light
+              p-3
+            " href="/sales/pos">Sales</a>
+  <a class="
+              list-group-item list-group-item-action list-group-item-light
+              p-3
+            " href="/admin/add-employee">Employee</a>
+  <a class="
+              list-group-item list-group-item-action list-group-item-light
+              p-3
+            " href="#" id="logout">Log Out</a>
+</div>
+<!-- not able to use local file ref... either 404 file not found or Not alloweed to load local resource... -->
+<!-- <script type='text/javascript' src='C://Users/boon_/Desktop/rocketacademy/bootcamp/Module3_BackEndApps/pos_project/node_modules/axios/dist/axios.min.js'></script>
+<script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+  integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
+  crossorigin="anonymous"></script>
+
+  <!-- had to do the redirection in .then() below as the one in express does not work...  -->
+<script>
+  const link = document.getElementById('logout');
+  link.addEventListener('click', (e) => {
+    axios({
+      method: 'post',
+      url: '/logout',
+    })
+      .then(() => {
+        window.location = "/index"
+      })
+      .catch((err) => { throw err });
+  });
+</script>
+</div>

@@ -14,6 +14,10 @@ router.get("/signin", userCtrl.goSignin);
 
 router.post("/signin", userCtrl.doSignin);
 
-router.get("/logout", userCtrl.doLogout);
+router.get("/setpass", userCtrl.goSetpass);
+
+router.post("/setpass", userCtrl.doSetpass);
+
+router.post("/logout", userCtrl.doLogout);
 
 export { router };

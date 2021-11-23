@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../template/head'); %>
+</head>
+
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+      <%- include('../template/sidebar'); %>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+          <!-- Top navigation-->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <a class="navbar-brand" href="#">Welcome <%= profile.name %></a>
+          </nav>
+          <!-- Page content-->
+          <div class="container-fluid">
+            <div class="table-responsive">
+              <form action="/admin/update-profile?_method=PUT" method="POST">
+                <table class="table">
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Business Name</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input class="form-control" type="text" name="name" required value="<%= profile.name %>" />
+                    </td>
+                    <td>
+                      <input class="form-control" type="email" name="email" required value="<%= profile.email %>" />
+                    </td>
+                    <td>
+                      <input class="form-control" type="tel" name="phone" value="<%= profile.phone %>" />
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" name="co_name" value="<%= profile.co_name %>" />
+                    </td>
+                  </tr>
+                </table>
+                <input class="btn btn-success btn-block" type="submit" value="Update Profile" />
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <footer>
+      <%- include('../template/footer'); %>
+    </footer>
+</body>
+
+</html>

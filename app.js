@@ -1,10 +1,12 @@
-import express, { request } from "express";
+import express from "express";
 import pg from "pg";
 import cookieParser from "cookie-parser";
 import methodOverride from "method-override";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { router as userRoutes } from "./routes/user.js";
+import { router as adminRoutes } from "./routes/admin.js";
+import { router as posRoutes } from "./routes/pos.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -54,6 +56,8 @@ const lockedAccess = (req, res, next) => {
 };
 
 app.use("/", userRoutes);
+app.use("/admin", lockedAccess, adminRoutes);
+app.use("/pos", lockedAccess, posRoutes);
 
 app.listen(3004);
 
