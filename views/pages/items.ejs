@@ -14,7 +14,7 @@
         <div id="page-content-wrapper">
           <!-- Top navigation-->
           <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <a class="navbar-brand" href="#">Add Employee</a>
+            <a class="navbar-brand" href="#">Items</a>
           </nav>
           <!-- Page content-->
           <div class="container-fluid">
@@ -22,45 +22,61 @@
               <table class="table table-hover">
 
                 <tr class="bg-success">
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Role</th>
+                  <th>Item</th>
+                  <th>Price</th>
+                  <th>Cost</th>
+                  <th>Category</th>
+                  <th>Image</th>
                   <th>Delete</th>
-                <% if(allEmployees !== undefined) { %>
                 </tr>
-                <% allEmployees.forEach((el)=> { %>
-                  <tr class="clickable" onclick="window.location='/admin/update-employee/<%= el.id %>'">
-                    <td>
-                      <%= el.name %>
-                    </td>
-                    <td>
-                      <%= el.email %>
-                    </td>
-                    <td>
-                      <%= el.phone %>
-                    </td>
-                    <td>
-                      <%= el.role %>
-                    </td>
-                    <td>
-                      <form action="/admin/delete-employee/<%= el.id %>?_method=DELETE" method="POST">
-                        <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
-                      </form>
-                    </td>
-                  </tr>
-                  <% }) %>
-                  <% } %> 
+                <% if(reqArr !==undefined) { %>
+                  <% reqArr[0].items.forEach((el)=> { %>
+                    <tr class="clickable" onclick="window.location='/admin/items/<%= el.id %>'">
+                      <td>
+                        <%= el.item %>
+                      </td>
+                      <td>
+                        <%= el.price %>
+                      </td>
+                      <td>
+                        <%= el.cost %>
+                      </td>
+                      <td>
+                        <%= el.category %>
+                      </td>
+                      <td>
+                        <% if(el.image !==null){ %>
+                          <img class="thumbnail" src="/<%= el.image %>" />
+                          <% } %>
+                      </td>
+                      <td>
+                        <form action="/admin/items/delete/<%= el.id %>?_method=DELETE" method="POST">
+                          <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+                        </form>
+                      </td>
+                    </tr>
+                    <% }) %>
+                      <% } %>
               </table>
             </div>
-            <form action="/admin/add-employee" method="POST">
-              <label for="name">Name: </label>
-              <input type="text" name="name" required/>
-              <label for="email">Email: </label>
-              <input type="email" name="email" required/>
-              <label for="phone">Phone: </label>
-              <input type="tel" name="phone" required/>
-              <input class="btn btn-success btn-block" type="submit" value="Add Employee" />
+            <form action="/admin/items" enctype="multipart/form-data" method="POST">
+              <label for="item">Item: </label>
+              <input type="text" name="item" required />
+              <label for="price">Price: </label>
+              <input type="number" name="price" step=0.01 min=0 value=0 />
+              <label for="cost">Cost: </label>
+              <input type="number" name="cost" step=0.01 min=0 value=0 />
+              <label for="cat_id">Category: </label>
+              <select name="cat_id">
+                <% reqArr[1].categories.forEach((el)=> { %>
+                  <option value="<%= el.id %>">
+                    <%= el.category %>
+                  </option>
+                  <% }); %>
+              </select>
+              <label for="image">Image: </label>
+              <input type="file" name="image" />
+              <input class="btn btn-success btn-block" type="submit" value="Add Item" />
             </form>
           </div>
         </div>

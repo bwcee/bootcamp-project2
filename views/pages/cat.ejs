@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../template/head'); %>
+</head>
+
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+      <%- include('../template/sidebar'); %>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+          <!-- Top navigation-->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <a class="navbar-brand" href="#">Categories</a>
+          </nav>
+          <!-- Page content-->
+          <div class="container-fluid">
+            <div class="table-responsive">
+              <table class="table table-hover">
+
+                <tr class="bg-success">
+                  <th>Category</th>
+                </tr>
+                <% if(allCat !==undefined) { %>
+                  <% allCat.forEach((el)=> { %>
+                    <tr class="clickable" onclick="window.location='/admin/cat/<%= el.id %>'">
+                      <td>
+                        <%= el.category %>
+                      </td>
+                      <td>
+                        <form action="/admin/cat/delete/<%= el.id %>?_method=DELETE" method="POST">
+                          <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+                        </form>
+                      </td>
+                    </tr>
+                    <% }) %>
+                      <% } %>
+              </table>
+            </div>
+            <form action="/admin/cat" method="POST">
+              <label for="category">Category: </label>
+              <input type="text" name="category" required />
+              <input class="btn btn-success btn-block" type="submit" value="Add Category" />
+            </form>
+          </div>
+        </div>
+    </div>
+    <footer>
+      <%- include('../template/footer'); %>
+    </footer>
+</body>
+
+</html>

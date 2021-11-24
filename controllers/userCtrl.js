@@ -27,7 +27,8 @@ export const doSignup = (req, res) => {
   const coArr = arr.slice(2);
   const newSignup = `INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *`;
   const newCo = `INSERT INTO companies (name) VALUES ($1) RETURNING *`;
-  const insertCo = `UPDATE users SET co_id=$1 WHERE id=$2`;
+  const insertCo = `UPDATE users SET co_id=$1 WHERE id=$2 RETURNING *`;
+  const defaultCat = `INSERT INTO categories (category, co_id) VALUES ('Nil category', $1)`;
   let user_id = "";
   pool
     .query(newSignup, usersArr)
@@ -40,7 +41,10 @@ export const doSignup = (req, res) => {
     .then((result) => {
       const usersCoArr = [result.rows[0].id];
       usersCoArr.push(user_id);
-      pool.query(insertCo, usersCoArr);
+      return pool.query(insertCo, usersCoArr);
+    })
+    .then((result) => {
+      pool.query(defaultCat, [result.rows[0].co_id]);
       return res.redirect(301, "/admin/dash");
     })
     .catch((err) => {

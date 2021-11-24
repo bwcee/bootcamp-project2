@@ -27,39 +27,39 @@
                   <th>Phone</th>
                   <th>Role</th>
                   <th>Delete</th>
-                <% if(allEmployees !== undefined) { %>
                 </tr>
-                <% allEmployees.forEach((el)=> { %>
-                  <tr class="clickable" onclick="window.location='/admin/employee/<%= el.id %>'">
-                    <td>
-                      <%= el.name %>
-                    </td>
-                    <td>
-                      <%= el.email %>
-                    </td>
-                    <td>
-                      <%= el.phone %>
-                    </td>
-                    <td>
-                      <%= el.role %>
-                    </td>
-                    <td>
-                      <form action="/admin/employee/delete/<%= el.id %>?_method=DELETE" method="POST">
-                        <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
-                      </form>
-                    </td>
-                  </tr>
-                  <% }) %>
-                  <% } %> 
+                <% if(allEmployees !==undefined) { %>
+                  <% allEmployees.forEach((el)=> { %>
+                    <tr class="clickable" onclick="window.location='/admin/employee/<%= el.id %>'">
+                      <td>
+                        <%= el.name %>
+                      </td>
+                      <td>
+                        <%= el.email %>
+                      </td>
+                      <td>
+                        <%= el.phone %>
+                      </td>
+                      <td>
+                        <%= el.role %>
+                      </td>
+                      <td>
+                        <form action="/admin/employee/delete/<%= el.id %>?_method=DELETE" method="POST">
+                          <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+                        </form>
+                      </td>
+                    </tr>
+                    <% }) %>
+                      <% } %>
               </table>
             </div>
             <form action="/admin/employee" method="POST">
               <label for="name">Name: </label>
-              <input type="text" name="name" required/>
+              <input type="text" name="name" required />
               <label for="email">Email: </label>
-              <input type="email" name="email" required/>
+              <input type="email" name="email" required />
               <label for="phone">Phone: </label>
-              <input type="tel" name="phone" required/>
+              <input type="tel" name="phone" required />
               <input class="btn btn-success btn-block" type="submit" value="Add Employee" />
             </form>
           </div>
