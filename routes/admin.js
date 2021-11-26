@@ -1,6 +1,5 @@
 import express from "express";
 import * as adminCtrl from "../controllers/adminCtrl.js";
-// import { multerUpload } from "../app.js";
 import multer from "multer";
 
 const multerUpload = multer({dest:'uploads/'})

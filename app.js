@@ -6,7 +6,7 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { router as userRoutes } from "./routes/user.js";
 import { router as adminRoutes } from "./routes/admin.js";
-import { router as posRoutes } from "./routes/pos.js";
+import { router as salesRoutes } from "./routes/sales.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -23,6 +23,8 @@ const app = express();
 app.set("views", join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, "/public")));
+app.use(express.static(join(__dirname, "/controllers")));
+app.use(express.static(join(__dirname, "/node_modules")));
 app.use(express.static(join(__dirname, "uploads")));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
@@ -58,7 +60,7 @@ const lockedAccess = (req, res, next) => {
 
 app.use("/", userRoutes);
 app.use("/admin", lockedAccess, adminRoutes);
-app.use("/pos", lockedAccess, posRoutes);
+app.use("/sales", lockedAccess, salesRoutes);
 
 app.listen(3004);
 

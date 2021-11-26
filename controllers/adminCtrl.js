@@ -27,7 +27,7 @@ export const goStart = (req, res) => {
 // employee controllers
 //////////////////////////////////
 export const goAddE = (req, res) => {
-  const getEmployees = `SELECT users.*, roles.role FROM users INNER JOIN roles ON users.role_id=roles.id WHERE co_id=${req.user.co_id} AND role_id=2`;
+  const getEmployees = `SELECT users.*, roles.role FROM users INNER JOIN roles ON users.role_id=roles.id WHERE co_id=${req.user.co_id} AND role_id=2 ORDER BY name`;
   pool
     .query(getEmployees)
     .then((result) => {
@@ -131,7 +131,7 @@ export const doUpdateP = (req, res) => {
 // item controllers
 //////////////////////////////////
 export const goAddItems = (req, res) => {
-  const getItems = `SELECT items.*, categories.category FROM items INNER JOIN categories ON items.cat_id=categories.id WHERE items.co_id=${req.user.co_id}`;
+  const getItems = `SELECT items.*, categories.category FROM items INNER JOIN categories ON items.cat_id=categories.id WHERE items.co_id=${req.user.co_id} ORDER BY item`;
   const getCats = `SELECT * FROM categories WHERE co_id=${req.user.co_id}`;
   let reqArr = [];
   pool
@@ -227,7 +227,7 @@ export const doDeleteItems = (req, res) => {
 // categories controllers
 //////////////////////////////////
 export const goAddCat = (req, res) => {
-  const getCat = `SELECT * FROM categories WHERE co_id=${req.user.co_id}`;
+  const getCat = `SELECT * FROM categories WHERE co_id=${req.user.co_id} ORDER BY category`;
   pool
     .query(getCat)
     .then((result) => {

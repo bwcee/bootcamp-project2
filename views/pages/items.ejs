@@ -1,89 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <%- include('../template/head'); %>
+  </head>
 
-<head>
-  <%- include('../template/head'); %>
-</head>
-
-<body>
-  <div class="d-flex" id="wrapper">
-    <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper">
-      <%- include('../template/sidebar'); %>
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar-->
+      <div class="border-end bg-white" id="sidebar-wrapper">
+        <%- include('../template/sidebar'); %>
         <!-- Page content wrapper-->
         <div id="page-content-wrapper">
           <!-- Top navigation-->
-          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+          <nav
+            class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+          >
             <a class="navbar-brand" href="#">Items</a>
           </nav>
           <!-- Page content-->
           <div class="container-fluid">
             <div class="table-responsive">
-              <table class="table table-hover">
-
+              <table class="table table-sm table-hover">
                 <tr class="bg-success">
-                  <th>Item</th>
-                  <th>Price</th>
-                  <th>Cost</th>
-                  <th>Category</th>
-                  <th>Image</th>
-                  <th>Delete</th>
+                  <th style="width: 24%">Item</th>
+                  <th style="width: 10%">Price</th>
+                  <th style="width: 10%">Cost</th>
+                  <th style="width: 36%">Category</th>
+                  <th style="width: 12%">Image</th>
+                  <th style="width: 8%">Delete</th>
                 </tr>
-                <% if(reqArr !==undefined) { %>
-                  <% reqArr[0].items.forEach((el)=> { %>
-                    <tr class="clickable" onclick="window.location='/admin/items/<%= el.id %>'">
-                      <td>
-                        <%= el.item %>
-                      </td>
-                      <td>
-                        <%= el.price %>
-                      </td>
-                      <td>
-                        <%= el.cost %>
-                      </td>
-                      <td>
-                        <%= el.category %>
-                      </td>
-                      <td>
-                        <% if(el.image !==null){ %>
-                          <img class="thumbnail" src="/<%= el.image %>" />
-                          <% } %>
-                      </td>
-                      <td>
-                        <form action="/admin/items/delete/<%= el.id %>?_method=DELETE" method="POST">
-                          <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
-                        </form>
-                      </td>
-                    </tr>
-                    <% }) %>
-                      <% } %>
+                <% if(reqArr !==undefined) { %> <%
+                reqArr[0].items.forEach((el)=> { %>
+                <tr
+                  class="clickable"
+                  onclick="window.location='/admin/items/<%= el.id %>'"
+                >
+                  <td><%= el.item %></td>
+                  <td><%= el.price %></td>
+                  <td><%= el.cost %></td>
+                  <td><%= el.category %></td>
+                  <td>
+                    <% if(el.image !==null){ %>
+                    <img class="thumbnail" src="/<%= el.image %>" />
+                    <% } %>
+                  </td>
+                  <td>
+                    <form
+                      action="/admin/items/delete/<%= el.id %>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button class="btn btn-light" type="submit">
+                        <i class="far fa-trash-alt text-danger"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                <% }) %> <% } %>
               </table>
             </div>
-            <form action="/admin/items" enctype="multipart/form-data" method="POST">
+            <form
+              action="/admin/items"
+              enctype="multipart/form-data"
+              method="POST"
+            >
               <label for="item">Item: </label>
               <input type="text" name="item" required />
               <label for="price">Price: </label>
-              <input type="number" name="price" step=0.01 min=0 value=0 />
+              <input type="number" name="price" step="0.01" min="0" value="0" />
               <label for="cost">Cost: </label>
-              <input type="number" name="cost" step=0.01 min=0 value=0 />
+              <input type="number" name="cost" step="0.01" min="0" value="0" />
               <label for="cat_id">Category: </label>
               <select name="cat_id">
                 <% reqArr[1].categories.forEach((el)=> { %>
-                  <option value="<%= el.id %>">
-                    <%= el.category %>
-                  </option>
-                  <% }); %>
+                <option value="<%= el.id %>"><%= el.category %></option>
+                <% }); %>
               </select>
               <label for="image">Image: </label>
               <input type="file" name="image" />
-              <input class="btn btn-success btn-block" type="submit" value="Add Item" />
+              <input
+                class="btn btn-success btn-block"
+                type="submit"
+                value="Add Item"
+              />
             </form>
           </div>
         </div>
+      </div>
+      <footer><%- include('../template/footer'); %></footer>
     </div>
-    <footer>
-      <%- include('../template/footer'); %>
-    </footer>
-</body>
-
+  </body>
 </html>
