@@ -29,3 +29,22 @@ export const goCashier = (req, res) => {
       return salesErrorHandler(err, res);
     });
 };
+
+export const doCashier = (req, res) => {
+  const saleItemsArr = req.body 
+  console.log("This is saleItemsArr", req.body)
+  // const addSale = `INSERT INTO sales (user_id) VALUES (${req.user.id}) RETURNING *`;
+  // pool
+  //   .query(addSale)
+  //   .then((result) => {
+  //     const sale_id = result.rows[0].id
+  //     const addSaleItem = `INSERT INTO sales_items (sales_id, item_id) VALUES (${sale_id}) `
+      
+      
+      
+      return res.redirect(301, "/sales/cashier");
+    // })
+    // .catch((err) => {
+    //   return adminErrorHandler(err, res);
+    // });
+};

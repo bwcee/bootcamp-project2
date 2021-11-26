@@ -12,16 +12,16 @@
       <div id="page-content-wrapper">
         <!-- Top navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-          <a class="navbar-brand" href="#">Cashier</a>
+          <a class="navbar-brand" href="#">Cashier <small class="text-muted" id="nowdate"></small></a>
         </nav>
         <!-- Page content-->
         <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-7"><small class="text-muted" id="nowdate"></small>
+            <div class="col-sm-7">
               <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-2">
                 <% allItems.forEach((el)=>{ %>
                   <div class="col mx-0 px-1">
-                    <div class="card mb-2" onclick="pushToOrderList('<%= el.item %>', '<%= el.price %>')">
+                    <div class="card mb-2" onclick="pushToOrderList('<%= el.id %>','<%= el.item %>', '<%= el.price %>')">
                       <% if(el.image !==null){ %>
                         <img class="card-img-top" src="/<%= el.image %>" />
                         <% } %>
@@ -41,10 +41,11 @@
             <div class="col-sm-5">
               <div class="card">
                 <div class="card-body p-1">
-                  <h5>Order</h5>
-                  <hr class="mb-0">
+                  <h5 class="mb-0">Order</h5>
+                  <hr class="my-1">
                   <ul class="list-unstyled" id="order_list"></ul>
-                  <p class="card-text font-weight-bold text-right" id="total_cost"></p>
+                  <p class="card-text font-weight-bold text-right mb-2" id="total_cost"></p>
+                  <button onclick="confirmSale()" id="confirm_order" class="btn btn-success btn-block hide">Confirm Sale</button>
                 </div>
               </div>
             </div>
@@ -57,7 +58,6 @@
   <body>
     <footer>
       <script src="/lodash/lodash.js"></script>
-      <script src="/jquery/dist/jquery.js"></script>
       <script src="/salesScript.js"></script>
 
       <%- include('../template/footer'); %>

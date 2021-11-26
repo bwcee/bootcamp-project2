@@ -6,8 +6,8 @@ let ordersArr = [];
 
 // add orders to #order_list
 // capture cashier order in ordersArr
-const pushToOrderList = (item, price) => {
-  const itemObj = { item: item, price: Number(price) };
+const pushToOrderList = (id, item, price) => {
+  const itemObj = { id: Number(id), item: item, price: Number(price) };
 
   if (!ordersArr.some((e) => e.item === itemObj.item)) {
     itemObj.count = 1;
@@ -27,7 +27,7 @@ const pushToOrderList = (item, price) => {
     let nameB = b.item.toLowerCase();
     return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
   });
-
+  console.log("This is ordersArr", ordersArr);
   listOrders();
 };
 
@@ -65,32 +65,39 @@ const listOrders = () => {
   ordersArr.forEach((e, index) => {
     $("#order_list").append(
       `<li >
-      <span>
       <button onclick="addOrder(${index})" class="btn btn-light">
       <i class="fas fa-plus-circle text-danger"></i></button>
-      </span>  
-      <span>
       <button onclick="removeOrder(${index})" class="btn btn-light">
       <i class="fas fa-minus-circle text-danger"></i></button>
-      </span>
       ${e.count} x ${e.item} 
-      <span>
       <button onclick="deleteOrder(${index})" class="btn btn-light">
       <i class="far fa-trash-alt text-danger"></i></button>
-      </span>
-      <span>$${e.total}</span>
+      <span class="font-italic">$${e.total}</span>
       </li>`
     );
   });
   $("#order_list").append("<hr class='mt-0'>");
   const totalCost = _.round(_.sumBy(ordersArr, "total"), 2).toFixed(2);
   $("#total_cost").html(`Total Cost $${totalCost}`);
+  $("#confirm_order").removeClass("hide");
 };
 
-{/* <span onclick="addOrder(${index})" class="text-danger font-weight-bold">+ </span>
-<span onclick="removeOrder(${index})" class="text-danger font-weight-bold">- </span> */}
-
-// add buttons to clear entire order + confirm order
+// trigger /cashier post route to update sales table
+const confirmSale = () => {
+  axios({
+    method: "post",
+    url: "/sales/cashier",
+    data: {
+      data: ordersArr,
+    },
+  })
+    .then(() => {
+      window.location = "/sales/cashier";
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 
 ///////////////////////////////////////////////////
 // misc function
@@ -100,7 +107,6 @@ const now = new Date();
 const nowDisp = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}, ${now.getDate()}-${
   now.getMonth() + 1
 }-${now.getFullYear()}`;
-
-$(document).ready(function () {
+$(document).ready(() => {
   $("#nowdate").html(nowDisp);
 });

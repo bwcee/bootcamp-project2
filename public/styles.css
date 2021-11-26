@@ -8,11 +8,15 @@
   max-width: 100%;
 }
 
-#order_list span:nth-child(n + 3) {
+#order_list button:nth-child(3) {
   float: right;
 }
 
-#order_list span:nth-child(4) {
-  display: inline-flex;
-  align-items: center;
+#order_list span {
+  float: right;
+  margin-top: 0.3rem;
+}
+
+.hide {
+  display: none;
 }
