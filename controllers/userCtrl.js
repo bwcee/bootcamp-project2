@@ -132,7 +132,7 @@ export const doSetpass = (req, res) => {
         res.cookie("userID", user.id);
         user.role_id === 1
           ? res.redirect(301, "/admin/dash")
-          : res.redirect(301, "/pos/cashier");
+          : res.redirect(301, "/sales/cashier");
       } else {
         throw "The doofus made an error";
       }

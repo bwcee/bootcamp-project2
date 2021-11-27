@@ -88,7 +88,7 @@ const confirmSale = () => {
     method: "post",
     url: "/sales/cashier",
     data: {
-      data: ordersArr,
+      ordersArr,
     },
   })
     .then(() => {
