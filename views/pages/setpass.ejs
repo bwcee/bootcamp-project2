@@ -8,16 +8,21 @@
     <header><%- include('../template/nav'); %></header>
 
     <main>
-      <div class="container-fluid">
+      <div class="container-fluid start-box2">
         <form action="/setpass" method="POST">
           <label for="email">Email: </label>
-          <input type="email" name="email" required />
+          <input class="form-control" type="email" name="email" required />
           <label for="old_pass">Old Password (if applicable): </label>
-          <input type="password" name="old_pass" />
+          <input class="form-control" type="password" name="old_pass" />
           <label for="password">New Password: </label>
-          <input type="password" name="password" required />
           <input
-            class="btn btn-success btn-block"
+            class="form-control"
+            type="password"
+            name="password"
+            required
+          />
+          <input
+            class="btn btn-success btn-block mt-3"
             type="submit"
             value="Create Password"
           />

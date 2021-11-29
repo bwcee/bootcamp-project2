@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('../template/head'); %>
-  </head>
 
-  <body>
-    <div class="d-flex" id="wrapper">
-      <!-- Sidebar-->
-      <div class="border-end bg-white" id="sidebar-wrapper">
-        <%- include('../template/sidebar'); %>
-      <!-- Page content wrapper-->
-      <div id="page-content-wrapper">
-        <!-- Top navigation-->
-        <nav
-          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
-        >
+<head>
+  <%- include('../template/head'); %>
+</head>
+
+<body>
+  <div class="d-flex start-box3" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+      <%- include('../template/sidebar'); %>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+          <!-- Top navigation-->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <a class="navbar-brand" href="#">Dashboard</a>
+          </nav>
+          <!-- Page content-->
           <div class="container-fluid">
-            
+            <form action="/admin/dash" method="GET">
+              <label for="date">Sales from Date: </label>
+              <input type="date" name="date" required/>
+              <button type="submit" class="btn btn-success btn-block mt-2 mb-4">Search</button>
+            </form>
+            <% if (sales.data.length===0 ){ %>
+              <p>You have no sales from <%= sales.date %> to date! Get cracking you lowly worm!!</p>
+              <% } else { %>
+                <p>Well done worm! Your sales from <%= sales.date %> to date are below. You have hopes of becoming a
+                    bug!! </p>
+                <ul>
+                  <% sales.data.forEach((el)=>{ %>
+                    <li><%= el.category %>
+                        <% el.items.forEach((item)=>{ %>
+                          <p class="mb-0"><%= item.count %> of <%= item.item %> @ $<%= item.price %> each for a total of $<%= item.total %> 
+                          </p>
+                          <% }) %>
+                    </li>
+                    <% }) %>
+                </ul>
+                <% } %>
           </div>
-        </nav>
-        <!-- Page content-->
-        <div class="container-fluid">
-          <h1 class="mt-4">Simple Sidebar</h1>
-          <p>
-            The starting state of the menu will appear collapsed on smaller
-            screens, and will appear non-collapsed on larger screens. When
-            toggled using the button below, the menu will change.
-          </p>
-          <p>
-            Make sure to keep all page content within the
-            <code>#page-content-wrapper</code>
-            . The top navbar is optional, and just for demonstration. Just
-            create an element with the
-            <code>#sidebarToggle</code>
-            ID which will toggle the menu when clicked.
-          </p>
         </div>
-      </div>
     </div>
-    <footer><%- include('../template/footer'); %></footer>
-  </body>
+    <footer>
+      <%- include('../template/footer'); %>
+    </footer>
+</body>
+
 </html>

@@ -3,6 +3,9 @@ import jsSHA from "jssha";
 import {} from "dotenv/config";
 import { pool } from "../app.js";
 
+//////////////////////////////////
+// to hash inputs
+//////////////////////////////////
 const getHash = (input) => {
   const SALT = process.env.SALT;
   const shaObj = new jsSHA("SHA-512", "TEXT", { encoding: "UTF8" });
@@ -11,10 +14,29 @@ const getHash = (input) => {
   return shaObj.getHash("HEX");
 };
 
+//////////////////////////////////
+// error handling
+//////////////////////////////////
+export const userErrorHandler = (err, res, text) => {
+  console.error("Error you doofus!", err);
+  const data = {
+    text: text,
+    link: "/index",
+    link_text: "go Home",
+  };
+  return res.render("pages/error", { data });
+};
+
+//////////////////////////////////
+// home page controllers
+//////////////////////////////////
 export const goHome = (req, res) => {
   res.render("pages/home");
 };
 
+//////////////////////////////////
+// sign up controllers
+//////////////////////////////////
 export const goSignup = (req, res) => {
   res.render("pages/signup");
 };
@@ -48,16 +70,15 @@ export const doSignup = (req, res) => {
       return res.redirect(301, "/admin/dash");
     })
     .catch((err) => {
-      console.error("Error you doofus!", err);
-      const data = {
-        text: "Sorry there is an error, probably cos email alr taken. Go back to Home page and try again.",
-        link: "/index",
-        link_text: "Go Home",
-      };
-      return res.render("pages/error", { data });
+      const text =
+        "Sorry there is an error, probably cos email alr taken. Go back to Home page and try again.";
+      userErrorHandler(err, res, text);
     });
 };
 
+//////////////////////////////////
+// sign in controllers
+//////////////////////////////////
 export const goSignin = (req, res) => {
   res.render("pages/signin");
 };
@@ -80,23 +101,20 @@ export const doSignin = (req, res) => {
         res.cookie("userID", user.id);
         user.role_id === 1
           ? res.redirect(301, "/admin/dash")
-          : res.redirect(301, "/pos/cashier");
+          : res.redirect(301, "/sales/cashier");
       } else {
         throw "The doofus used a wrong password";
       }
     })
     .catch((err) => {
-      console.error("Error you doofus!", err);
-      const data = {
-        text: "Sorry, login fail. Please try again.",
-        link: "/index",
-        link_text: "Go Home",
-      };
-
-      return res.render("pages/error", { data });
+      const text = "Sorry, login fail. Please try again.";
+      userErrorHandler(err, res, text);
     });
 };
 
+//////////////////////////////////
+// log out controllers
+//////////////////////////////////
 export const doLogout = (req, res) => {
   res.clearCookie("loggedIn");
   // res.clearCookie("hashedID");
@@ -104,6 +122,9 @@ export const doLogout = (req, res) => {
   return res.redirect(301, "/index");
 };
 
+//////////////////////////////////
+// set password controllers
+//////////////////////////////////
 export const goSetpass = (req, res) => {
   res.render("pages/setpass");
 };
@@ -138,12 +159,7 @@ export const doSetpass = (req, res) => {
       }
     })
     .catch((err) => {
-      console.error("Error you doofus!", err);
-      const data = {
-        text: "Sorry there is an error. Go back to Home page and try again.",
-        link: "/index",
-        link_text: "Go Home",
-      };
-      return res.render("pages/error", { data });
+      const text = "Sorry there is an error. Go back to Home page and try again.";
+      userErrorHandler(err, res, text);
     });
 };

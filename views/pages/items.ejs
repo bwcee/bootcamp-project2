@@ -20,21 +20,18 @@
           <!-- Page content-->
           <div class="container-fluid">
             <div class="table-responsive">
-              <table class="table table-sm table-hover">
+              <table class="table table-sm table-hover mb-0">
                 <tr class="bg-success">
-                  <th style="width: 24%">Item</th>
+                  <th style="width: 20%">Item</th>
                   <th style="width: 10%">Price</th>
                   <th style="width: 10%">Cost</th>
                   <th style="width: 36%">Category</th>
                   <th style="width: 12%">Image</th>
-                  <th style="width: 8%">Delete</th>
+                  <th style="width: 12%"></th>
                 </tr>
                 <% if(reqArr !==undefined) { %> <%
                 reqArr[0].items.forEach((el)=> { %>
-                <tr
-                  class="clickable"
-                  onclick="window.location='/admin/items/<%= el.id %>'"
-                >
+                <tr>
                   <td><%= el.item %></td>
                   <td><%= el.price %></td>
                   <td><%= el.cost %></td>
@@ -44,19 +41,25 @@
                     <img class="thumbnail" src="/<%= el.image %>" />
                     <% } %>
                   </td>
-                  <td>
-                    <form
-                      action="/admin/items/delete/<%= el.id %>?_method=DELETE"
-                      method="POST"
-                    >
-                      <button class="btn btn-light" type="submit">
-                        <i class="far fa-trash-alt text-danger"></i>
+                  <td style="white-space: nowrap">
+                    <a href="/admin/items/<%= el.id %>"
+                      ><button class="btn btn-light" type="button">
+                        <i class="far fa-edit text-danger"></i>
                       </button>
-                    </form>
+                    </a>
+                    <a href="/admin/items"
+                      ><button
+                        onclick="goDelete('<%= el.id %>')"
+                        class="btn btn-light"
+                        type="button"
+                      >
+                        <i class="far fa-trash-alt text-danger"></i></button
+                    ></a>
                   </td>
                 </tr>
                 <% }) %> <% } %>
               </table>
+              <hr />
             </div>
             <form
               action="/admin/items"
@@ -86,7 +89,17 @@
           </div>
         </div>
       </div>
-      <footer><%- include('../template/footer'); %></footer>
+      <footer>
+        <%- include('../template/footer'); %>
+        <script>
+          const goDelete = (input) => {
+            axios({
+              method: "delete",
+              url: `items/delete/${input}`,
+            });
+          };
+        </script>
+      </footer>
     </div>
   </body>
 </html>

@@ -102,11 +102,17 @@ const confirmSale = () => {
 ///////////////////////////////////////////////////
 // misc function
 ///////////////////////////////////////////////////
-// show current date time every time page refreshes
-const now = new Date();
-const nowDisp = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}, ${now.getDate()}-${
-  now.getMonth() + 1
-}-${now.getFullYear()}`;
-$(document).ready(() => {
+// // show current date time every time page refreshes
+// const now = new Date();
+// const nowDisp = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}, ${now.getDate()}-${
+//   now.getMonth() + 1
+// }-${now.getFullYear()}`;
+const setTime = () => {
+  let nowDisp = new Date().toLocaleTimeString("en-US");
   $("#nowdate").html(nowDisp);
+};
+
+$(document).ready(() => {
+  setTime();
+  setInterval(setTime, 1000);
 });

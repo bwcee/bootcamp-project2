@@ -32,8 +32,8 @@ export const goCashier = (req, res) => {
 
 export const doCashier = (req, res) => {
   const saleItemsArr = Object.values(req.body)[0];
-  console.log("This is req.body", req.body);
-  console.log("This is saleItemsArr", saleItemsArr);
+  // console.log("This is req.body", req.body);
+  // console.log("This is saleItemsArr", saleItemsArr);
   const addSale = `INSERT INTO sales (user_id) VALUES (${req.user.id}) RETURNING *`;
   pool
     .query(addSale)
@@ -51,7 +51,7 @@ export const doCashier = (req, res) => {
       );
     })
     .then((result) => {
-      console.log("This is all the results from Promise.all", result);
+      // console.log("This is all the results from Promise.all", result);
       return res.redirect(301, "/sales/cashier");
     })
     .catch((err) => {

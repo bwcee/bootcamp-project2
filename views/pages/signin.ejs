@@ -8,14 +8,14 @@
     <header><%- include('../template/nav'); %></header>
 
     <main>
-      <div class="container-fluid">
+      <div id="signin-form" class="container-fluid start-box2">
         <form action="/signin" method="POST">
           <label for="email">Email: </label>
-          <input type="text" name="email" />
+          <input class="form-control" type="text" name="email" />
           <label for="password">Password: </label>
-          <input type="password" name="password" />
+          <input class="form-control" type="password" name="password" />
           <input
-            class="btn btn-success btn-block"
+            class="btn btn-success btn-block mt-3"
             type="submit"
             value="Login To Your Account"
           />

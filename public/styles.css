@@ -1,3 +1,41 @@
+/* general utility class for different pages*/
+.start-box {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-box2 {
+  height: 80vh;
+}
+
+.start-box3 {
+  height: 90vh;
+}
+
+.navbar {
+  padding-top: 0%;
+  padding-bottom: 0;
+}
+
+.sidebar-heading {
+  height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* home page*/
+.jumbotron {
+  background-color: white;
+}
+
+/* sign-in form*/
+#signin-form .form-control {
+  display: inline-block;
+  width: auto;
+}
+
 .thumbnail {
   max-height: 60%;
   max-width: 60%;
