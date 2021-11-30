@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  <div class="d-flex" id="wrapper">
+  <div class="d-flex start-box3" id="wrapper">
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper">
       <%- include('../template/sidebar'); %>
@@ -19,10 +19,11 @@
           <!-- Page content-->
           <div class="container-fluid">
             <div class="table-responsive">
-              <table class="table table-hover">
+              <table class="table table-sm table-hover">
 
                 <tr class="bg-success">
                   <th>Category</th>
+                  <th></th>
                 </tr>
                 <% if(allCat !==undefined) { %>
                   <% allCat.forEach((el)=> { %>

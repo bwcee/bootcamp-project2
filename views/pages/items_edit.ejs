@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  <div class="d-flex" id="wrapper">
+  <div class="d-flex start-box3" id="wrapper">
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper">
       <%- include('../template/sidebar'); %>
@@ -20,27 +20,27 @@
           <div class="container-fluid">
             <div class="table-responsive">
               <form action="/admin/items/<%= reqArr[0].id %>?_method=PUT" enctype="multipart/form-data" method="POST">
-                <table class="table">
+                <table class="table table-sm">
                   <tr>
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Cost</th>
-                    <th>Category</th>
-                    <th>Image</th>
+                    <th style="width: 30%">Item</th>
+                    <th style="width: 12%">Price </th>
+                    <th style="width: 13%">Cost</th>
+                    <th style="width: 25%">Category</th>
+                    <th style="width: 20%">Image</th>
                   </tr>
                   <tr>
-                    <td>
+                    <td class="px-1">
                       <input class="form-control" type="text" name="item" required value="<%= reqArr[0].item %>" />
                     </td>
-                    <td>
+                    <td class="px-1">
                       <input class="form-control" type="number" name="price" step=0.01 min=0
                         value="<%= reqArr[0].price %>" />
                     </td>
-                    <td>
+                    <td class="px-1">
                       <input class="form-control" type="number" name="cost" step=0.01 min=0
                         value="<%= reqArr[0].cost %>" />
                     </td>
-                    <td>
+                    <td class="px-1">
                       <select name="cat_id">
                         <% reqArr[1].categories.forEach((el)=> { %>
                          <% if(el.id === reqArr[0].cat_id){ %>
@@ -55,7 +55,7 @@
                           <% }); %>
                       </select>
                     </td>
-                    <td>
+                    <td class="px-1">
                       <input class="form-control" type="file" name="image" />
                     </td>
                   </tr>
